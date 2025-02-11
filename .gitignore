@@ -1,0 +1,4 @@
+/.idea/
+/*.iml
+/jwt/.gradle/
+/jwt/build/

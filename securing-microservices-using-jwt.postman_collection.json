@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "f5acbc7d-01d6-478e-9bc4-635269d7189f",
+		"name": "securing-microservices-using-jwt",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30312233"
+	},
+	"item": [
+		{
+			"name": "Request  JWT as Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\": \"admin\",\r\n    \"secret\": \"admin-secret\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{auth-service}}/api/token",
+					"protocol": "http",
+					"host": [
+						"{{auth-service}}"
+					],
+					"path": [
+						"api",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request JWT as User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\": \"user\",\r\n    \"secret\": \"user-secret\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{auth-service}}/api/token",
+					"protocol": "http",
+					"host": [
+						"{{auth-service}}"
+					],
+					"path": [
+						"api",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Age",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{data-service}}/api/user/age",
+					"protocol": "http",
+					"host": [
+						"{{data-service}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"age"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Admin Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{data-service}}/api/admin/data",
+					"protocol": "http",
+					"host": [
+						"{{data-service}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"data"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"let response = pm.response.json();\r",
+					"if (response && response.token) {\r",
+					"    pm.collectionVariables.set(\"token\", response.token); \r",
+					"}\r",
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "auth-service",
+			"value": "localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "data-service",
+			"value": "localhost:8081",
+			"type": "string"
+		}
+	]
+}
