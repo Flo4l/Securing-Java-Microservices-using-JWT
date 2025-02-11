@@ -1,8 +1,7 @@
 # Microservice-Landschaften sicher gestalten: JWT als Schlüsseltechnologie
 
-Dieses Repo dient als Beispiel zur Implementierung von JWTs im Kontext von Microservices
-und wird begleitet von einem Blogbeitrag
-auf [falbers.de/blog](https://falbers.de/blog/securing-microservices-using-jwt).
+Dieses Repo zeigt die Implementierung von JWTs im Kontext von Java Microservices
+und dient als vollständiges Beispiel [für einen Blogbeitrag auf falbers.de](https://falbers.de/blog/securing-microservices-using-jwt).
 
 Zweck ist die Erzeugung von asymmetrisch signierten JWTs durch einen Auth-Service sowie
 eine Zugriffssteuerung mit ausgestellten JWTs durch weitere Services.
